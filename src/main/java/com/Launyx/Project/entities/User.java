@@ -2,8 +2,20 @@ package com.Launyx.Project.entities;
 
 import java.io.Serializable;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+
+@Entity
+@Table(name = "tb_user")    // Annotation Table especifica o nome da tabela do banco de dados, o nome user já é utilizado pelo H2
 public class User implements Serializable{
     
+    // Annotation para indicar a chave primária
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String email;

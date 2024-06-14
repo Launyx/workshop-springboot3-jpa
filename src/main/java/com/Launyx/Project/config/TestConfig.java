@@ -9,12 +9,16 @@ import org.springframework.context.annotation.Profile;
 
 import java.util.Arrays;
 
+// especificando esta classe como de configuração e específica para o perfil de test
 @Configuration
 @Profile("test")
 public class TestConfig implements CommandLineRunner {
 
+
+    // Annotation para Associar instância e dependencia de outro objeto
     @Autowired
     private UserRepository userRepository;
+
 
 
     @Override

@@ -4,13 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
 @Entity
 @Table(name = "tb_user")    // Annotation Table especifica o nome da tabela do banco de dados, o nome user já é utilizado pelo H2
 public class User implements Serializable{
-    
+
     // Annotation para indicar a chave primária
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,6 +21,7 @@ public class User implements Serializable{
     private String phone;
     private String password;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<Order> orders = new ArrayList<>();
 
@@ -78,6 +80,7 @@ public class User implements Serializable{
     public List<Order> getOrders() {
         return orders;
     }
+
     @Override
     public int hashCode() {
         final int prime = 31;

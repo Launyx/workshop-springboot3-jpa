@@ -1,5 +1,6 @@
 package com.Launyx.Project.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -16,7 +17,8 @@ public class Category implements Serializable {
     private Long Id;
     private String name;
 
-    @Transient
+    @JsonIgnore
+    @ManyToMany(mappedBy = "categories")    // Nome da coleção da outra classe que faz parte do ManyToMany
     private Set<Product> products = new HashSet<>();
 
     public Category(){

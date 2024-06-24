@@ -1,9 +1,11 @@
 package com.Launyx.Project.entities;
 
 import com.Launyx.Project.entities.pk.OrderItemPK;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import org.aspectj.weaver.ast.Or;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -12,9 +14,9 @@ import java.util.Objects;
 @Table(name = "td_order_item")
 public class OrderItem implements Serializable {
 
-
+    // Sempre que criar uma classe auxiliar que é o id composto, deve-se instancia-la
     @EmbeddedId
-    private OrderItemPK id;
+    private OrderItemPK id = new OrderItemPK();
 
     private Integer quantity;
     private Double price;
@@ -31,6 +33,7 @@ public class OrderItem implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public Order getOrder(){
         return id.getOrder();
     }

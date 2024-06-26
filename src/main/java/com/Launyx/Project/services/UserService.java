@@ -2,6 +2,7 @@ package com.Launyx.Project.services;
 
 import com.Launyx.Project.entities.User;
 import com.Launyx.Project.repositories.UserRepository;
+import com.Launyx.Project.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +26,7 @@ public class UserService {
     public User findById(Long Id){
         Optional<User> obj = repository.findById(Id);
         // .get() retorna um objeto do tipo X do 'Optional<X>'
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(Id));
     }
 
     // Método para adicionar um usuário

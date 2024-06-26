@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
-import org.aspectj.weaver.ast.Or;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -31,6 +30,10 @@ public class OrderItem implements Serializable {
         id.setProduct(product);
         this.quantity = quantity;
         this.price = price;
+    }
+
+    public Double getSubTotal(){
+        return price * quantity;
     }
 
     @JsonIgnore

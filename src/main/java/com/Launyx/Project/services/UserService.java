@@ -27,4 +27,9 @@ public class UserService {
         // .get() retorna um objeto do tipo X do 'Optional<X>'
         return obj.get();
     }
+
+    // Método para adicionar um usuário
+    public User insert(User obj){
+        return repository.save(obj);
+    }
 }

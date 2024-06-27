@@ -2,8 +2,11 @@ package com.Launyx.Project.services;
 
 import com.Launyx.Project.entities.User;
 import com.Launyx.Project.repositories.UserRepository;
+import com.Launyx.Project.services.exceptions.DatabaseException;
 import com.Launyx.Project.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,8 +37,16 @@ public class UserService {
         return repository.save(obj);
     }
 
-    public void delete(Long id){
-        repository.deleteById(id);
+    public void delete(Long id) {
+        try {
+            if (repository.existsById(id)) {
+                repository.deleteById(id);
+            } else {
+                throw new ResourceNotFoundException(id);
+            }
+        } catch (DataIntegrityViolationException e) {
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     public User update(Long id, User obj){
